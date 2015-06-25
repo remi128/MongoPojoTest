@@ -1,7 +1,10 @@
 package de.braintags.mongoPojo;
 
+import java.util.List;
+
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
 
@@ -41,6 +44,22 @@ public class MorphiaTest {
 
     final Employee elmer = new Employee("Elmer Fudd", 50000.0);
     datastore.save(elmer);
+
+    final Employee daffy = new Employee("Daffy Duck", 40000.0);
+    datastore.save(daffy);
+
+    final Employee pepe = new Employee("Pepé Le Pew", 25000.0);
+    datastore.save(pepe);
+
+    elmer.getDirectReports().add(daffy);
+    elmer.getDirectReports().add(pepe);
+
+    datastore.save(elmer);
+
+    final Query<Employee> query = datastore.createQuery(Employee.class);
+    final List<Employee> employees = query.asList();
+
+    System.out.println("found " + employees.size());
 
   }
 

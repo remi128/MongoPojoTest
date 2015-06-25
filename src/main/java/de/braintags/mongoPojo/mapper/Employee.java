@@ -1,5 +1,6 @@
 package de.braintags.mongoPojo.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -28,6 +29,23 @@ public class Employee {
   public Employee(String name, Double salary) {
     this.name = name;
     this.salary = salary;
+  }
+
+  /**
+   * @return the directReports
+   */
+  public final List<Employee> getDirectReports() {
+    if (directReports == null)
+      directReports = new ArrayList<Employee>();
+    return directReports;
+  }
+
+  /**
+   * @param directReports
+   *          the directReports to set
+   */
+  public final void setDirectReports(List<Employee> directReports) {
+    this.directReports = directReports;
   }
 
 }
